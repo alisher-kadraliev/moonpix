@@ -1,8 +1,9 @@
+import PopUp from "./components/PopUp";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="h-[1000px]">
+      <PopUp />
     </div>
   );
 }
