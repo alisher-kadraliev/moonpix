@@ -1,58 +1,46 @@
-"use client"
-import { useState, useEffect } from 'react';
+'use client';
 
-const Popup: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(false);
+import React, { useState } from 'react';
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsVisible(true);
-        }, 1000); // Show the pop-up after 3 seconds
+const PopUp = () => {
+    const [bgColor, setBgColor] = useState('#000'); // Default background color
+    const [textColor, setTextColor] = useState('#fff'); // Default text color
 
-        return () => clearTimeout(timer); // Cleanup timer
-    }, []);
+    const handleApply = () => {
+        // Save settings to localStorage
+        localStorage.setItem('popupBgColor', bgColor);
+        localStorage.setItem('popupTextColor', textColor);
 
-    const closePopup = () => {
-        setIsVisible(false);
+        // Log the changes to the console
+        console.log(`Applied settings: Background Color - ${bgColor}, Text Color - ${textColor}`);
+
+        // Update popup.js file (this part is conceptual, as direct file manipulation isn't possible in a browser)
+        // You would typically need a server-side solution for this.
+        // For demonstration, we will just log the intended changes.
+        console.log(`Update popup.js with: ${bgColor}, ${textColor}`);
     };
-
-    if (!isVisible) {
-        return null;
-    }
 
     return (
         <div>
-            <div style={styles.overlay}></div>
-            <div style={styles.popup}>
-                <p>This is a pop-up message!</p>
-                <button onClick={closePopup}>Close</button>
+            <div style={{ backgroundColor: bgColor, color: textColor, width: '300px', height: '100px', position: 'fixed', bottom: '0', left: '0' }}>
+                <div>PopUp</div>
+            </div>
+            <div>
+                <div>PopUp</div>
+                <input
+                    type="color"
+                    value={bgColor}
+                    onChange={(e) => setBgColor(e.target.value)}
+                />
+                <input
+                    type="color"
+                    value={textColor}
+                    onChange={(e) => setTextColor(e.target.value)}
+                />
+                <button onClick={handleApply}>Apply</button>
             </div>
         </div>
     );
-};
+}
 
-const styles = {
-    overlay: {
-        display: 'block',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 999,
-    } as const,
-    popup: {
-        display: 'block',
-        position: 'fixed',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        padding: '20px',
-        backgroundColor: 'white',
-        border: '2px solid black',
-        zIndex: 1000,
-    } as const,
-};
-
-export default Popup;
+export default PopUp;

@@ -1,25 +1,18 @@
 (function () {
-    const popupHTML = `
-        <div id="overlay" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-        <div id="popup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 20px; background-color: white; border: 2px solid black; z-index: 1000;">
-            <p>This is a pop-up message!</p>
-            <button id="closeBtn">Close</button>
-        </div>
-    `;
+    const bgColor = localStorage.getItem('popupBgColor') || '#000'; // Retrieve background color
+    const textColor = localStorage.getItem('popupTextColor') || '#fff'; // Retrieve text color
 
-    document.body.insertAdjacentHTML('beforeend', popupHTML);
+    const popUpDiv = document.createElement('div');
+    popUpDiv.style.backgroundColor = bgColor; // Apply background color
+    popUpDiv.style.color = textColor; // Apply text color
+    popUpDiv.style.width = '300px'; // Set width
+    popUpDiv.style.height = '100px'; // Set height
+    popUpDiv.style.position = 'fixed'; // Set position
+    popUpDiv.style.bottom = '0'; // Set bottom position
+    popUpDiv.style.left = '0'; // Set left position
+    popUpDiv.innerText = 'PopUp';
+    document.body.appendChild(popUpDiv);
 
-    function showPopup() {
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    }
-
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
-    }
-
-    document.getElementById('closeBtn').addEventListener('click', closePopup);
-
-    setTimeout(showPopup, 3000);
+    // Log the current settings to the console
+    console.log(`Current settings: Background Color - ${bgColor}, Text Color - ${textColor}`);
 })();
