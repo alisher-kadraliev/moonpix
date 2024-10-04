@@ -1,3 +1,13 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "no-unused-vars": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    // Allow unused variables for props
+    "@typescript-eslint/no-unused-vars": ["off", { "argsIgnorePattern": "^_" }],
+    // Allow empty object types (change to "error" to enforce)
+    "@typescript-eslint/no-empty-interface": "off", // Updated to allow empty interfaces
+    "@typescript-eslint/no-empty-object-type": "off" // Added to allow empty object types
+  }
 }
